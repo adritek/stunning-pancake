@@ -25,15 +25,14 @@ app.get("/:name", (req, res) => {
     res.send(`Hello ${req.params.name}`)
 })
 
-// fix
 app.get("/fetchMonth/:num", (req, res) => {
-    let index = parseInt(num) - 1;
-    if (index >= 1 && index < months.length) {
-        res.send(months[index]);
+    let num = parseInt(req.params.num);
+    if(num < 1 || num > 12) {
+        res.send("Not a valid month number")
     } else {
-        res.status(400).send("Invalid month number");
+        res.send(months[num-1])
     }
-});
+})
 
 app.listen(3333, () => {
     console.log(`Listening at http://localhost:3333`)
